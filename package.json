@@ -1,0 +1,24 @@
+{
+  "name": "questionssdc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LinkSDC/questionsSDC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LinkSDC/questionsSDC/issues"
+  },
+  "homepage": "https://github.com/LinkSDC/questionsSDC#readme",
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "pg": "^8.7.3"
+  }
+}
