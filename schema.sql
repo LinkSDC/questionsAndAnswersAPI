@@ -45,3 +45,11 @@ CREATE TABLE IF NOT EXISTS answers_photos (
 
 ALTER TABLE product ADD COLUMN created_at TIMESTAMP DEFAULT NOW();
 ALTER TABLE product ADD COLUMN updated_at TIMESTAMP DEFAULT NOW();
+
+ALTER TABLE questions ALTER COLUMN question_date TYPE timestamp using to_timestamp(question_date/1000)::date
+ALTER TABLE questions ALTER COLUMN question_date SET default current_timestamp;
+
+alter table answers alter column date type timestamp using to_timestamp(date/1000)::date;
+create index idx_answers_photos_answer_id on answers_photos(answer_id);
+create index idx_questions_product_id on questions(product_id);
+create index idx_answers_question_id on answers(question_id);

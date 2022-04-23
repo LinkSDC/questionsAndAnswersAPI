@@ -1,14 +1,40 @@
 const { pool} = require('../db.js');
 
+// `select row_to_json(row) as results
+// from (
+//   select question_id, question_body, (
+//     select jsonb(row_to_json(a))
+//     from (
+//       select * from answers where question_id = questions.question_id
+//     ) as a
+//   )
+//   from questions
+//   where product_id = $1 AND reported != 'true'
+// ) row`
 const getAnswers = async(req, res) => {
   const {question_id} = req.params;
 
+  const send = {page: req.query.page||0, count: req.query.count || 5}
   try {
     let result = await pool.query(
-      'SELECT answer_id as id, to_timestamp(date/1000)::date date, answerer_name, helpfulness FROM answers WHERE question_id = $1', [question_id]
+      `
+      SELECT answer_id, body, date, answerer_name, helpfulness,
+        (
+          SELECT coalesce(json_agg(
+            json_build_object('id', id, 'url', url)
+            ), '[]') as photos
+          from answers_photos
+          where answer_id = answers.answer_id
+        )
+      FROM answers
+      WHERE question_id = $1
+      LIMIT $2
+      `,
+       [question_id, send.count]
       );
     if (result) {
-      res.json(result.rows);
+      let final = {...send, results: result.rows}
+      res.json(final);
     }
   } catch (err) {
     res.status(400);
