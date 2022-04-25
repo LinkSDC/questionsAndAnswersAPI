@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
 require('dotenv').config();
 
 const app = express();
@@ -7,6 +8,7 @@ const { router } = require('./routes/routes.js');
 
 app.use(cors());
 app.use(express.json());
+app.use(morgan('dev'));
 
 app.use('/api/fec2/rfp/qa', router);
 

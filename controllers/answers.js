@@ -25,11 +25,11 @@ const getAnswers = async(req, res) => {
 }
 
 const postAnswer = async(req, res) => {
-  const { answer_id } = req.params;
+  const { question_id } = req.params;
   const { body, name, email, photos } = req.body;
-
+  console.log( question_id, body, name, email, photos)
   try {
-    let result = await create(body, name, email, photos);
+    let result = await create(question_id, body, name, email, photos);
 
     if (result) {
       res.sendStatus(201);
