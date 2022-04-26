@@ -6,6 +6,6 @@ export let options = {
 };
 //Below randomize the endpoints
 export default function () {
-  // http.get(`http://localhost:3113/api/fec2/rfp/qa/questions/?product_id=${Math.floor(Math.random() * (1000000 - 1 + 1)) + 1}`);
-  http.get(`http://localhost:3113/api/fec2/rfp/qa/questions/${Math.floor(Math.random() * (1000000 - 1 + 1)) + 1}/answers`);
+  http.get(`http://localhost:3113/api/fec2/rfp/qa/questions/?product_id=${Math.floor(Math.random() * (1000000 - 1 + 1)) + 1}`);
+  // http.get(`http://localhost:3113/api/fec2/rfp/qa/questions/${Math.floor(Math.random() * (1000000 - 1 + 1)) + 1}/answers`);
 }

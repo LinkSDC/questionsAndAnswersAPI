@@ -20,13 +20,14 @@ const index = async(product_id, page, count) => {
             )
           ), '{}') as answers
         FROM answers
-        WHERE question_id = questions.question_id
+        WHERE question_id = questions.question_id AND reported = 'f'
       )
       FROM questions
-      WHERE product_id = $1 AND reported != 'true'
-      LIMIT $2
+      WHERE product_id = $1 AND reported = 'f'
+      OFFSET $2
+      LIMIT $3
     `
-    , [product_id, count]
+    , [product_id, page, count]
     );
 }
 

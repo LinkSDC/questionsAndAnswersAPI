@@ -13,9 +13,10 @@ const index = async(question_id, count, page) => {
       )
     FROM answers
     WHERE question_id = $1
-    LIMIT $2
+    OFFSET $2
+    LIMIT $3
     `,
-     [question_id, count]
+     [question_id, page, count]
     );
 }
 
