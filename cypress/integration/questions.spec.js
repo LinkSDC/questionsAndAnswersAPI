@@ -53,17 +53,7 @@ describe('Questions route', ()=>{
         })
     })
 
-    it('should throw 400 if there is no product id', ()=>{
-      cy.request({
-        method: 'GET',
-        url: `http://localhost:3113/api/fec2/rfp/qa/questions`,
-        failOnStatusCode: false
-      })
-      .should(res=>{
-        expect(res.status).to.eq(400);
-        expect(res.body).to.eq('Bad Request');
-      })
-    })
+    v
   })
 })
 

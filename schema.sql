@@ -5,11 +5,6 @@ SET schema sdc;
 
 CREATE TABLE IF NOT EXISTS product (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(60) NOT NULL,
-  slogan TEXT,
-  description TEXT,
-  category VARCHAR(60),
-  default_price INT
 );
 
 CREATE TABLE IF NOT EXISTS questions (
@@ -47,11 +42,13 @@ ALTER TABLE product ADD COLUMN created_at TIMESTAMP DEFAULT NOW();
 ALTER TABLE product ADD COLUMN updated_at TIMESTAMP DEFAULT NOW();
 
 ALTER TABLE questions ALTER COLUMN question_date TYPE timestamp using to_timestamp(question_date/1000)::date
-ALTER TABLE questions ALTER COLUMN question_date SET default current_timestamp;
+ALTER TABLE questions ALTER COLUMN question_date SET default NOW();
 
 ALTER TABLE answers alter column date TYPE timestamp using to_timestamp(date/1000)::date;
-ALTER TABLE answers ALTER COLUMN date SET default current_timestamp;
+ALTER TABLE answers ALTER COLUMN date SET default NOW();
 
 CREATE INDEX idx_answers_photos_answer_id ON answers_photos(answer_id);
 CREATE INDEX idx_questions_product_id ON questions(product_id);
 CREATE INDEX idx_answers_question_id ON answers(question_id);
+CREATE INDEX idx_questions_reported ON questions(reported);
+CREATE INDEX idx_answers_reported ON answers(reported);

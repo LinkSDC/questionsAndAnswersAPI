@@ -12,7 +12,7 @@ const index = async(question_id, count, page) => {
         where answer_id = answers.answer_id
       )
     FROM answers
-    WHERE question_id = $1
+    WHERE question_id = $1 AND reported = 'f'
     OFFSET $2
     LIMIT $3
     `,
